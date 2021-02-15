@@ -8,8 +8,6 @@ inStock = ""
 
 link = "https://www.game.co.za/game-za/en/All-Game-Categories/Electronics-%26-Entertainment/Gaming/Consoles/PlayStation-Consoles/Playstation-PS5-1TB-Glacier-White-PS5-1TB---GLACIER-WH/p/818469-EA"
 
-link = "https://www.game.co.za/game-za/en/All-Game-Categories/Electronics-%26-Entertainment/Gaming/Consoles/PlayStation-Consoles/Playstation-PS4-500GB-Bundle-%2B3-Games%2B-PS3M-10231311/p/818149-EA"
-
 resp = session.get(link)  # Use the object above to connect to needed webpage
 resp.html.render()  # Run JavaScript code on webpage
 
