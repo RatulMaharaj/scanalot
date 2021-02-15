@@ -6,9 +6,7 @@ import json
 
 notify = False
 
-link = (
-    "https://api.takealot.com/rest/v-1-10-0/product-details/PLID70627463?platform=mobi"
-)
+link = "https://api.takealot.com/rest/v-1-10-0/product-details/PLID70627463?platform=mobi"
 
 r = requests.get(link)
 data = json.loads(r.text)
