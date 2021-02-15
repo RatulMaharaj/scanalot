@@ -21,8 +21,8 @@ print("Takealot has stock: ", notify)
 
 if notify:  # Send a notification
     message = Mail(
-        from_email="PS5BOT@cinnamonspiceworks.co.za",
-        to_emails="ratulmaharaj@gmail.com",
+        from_email=os.environ.get("FROM_EMAIL"),
+        to_emails=os.environ.get("TO_EMAIL"),
         subject="The PS5 is in stock!!!",
         html_content=f"Click on this <a href='{data['seo']['canonical']}'>link</a> to buy!",
     )
