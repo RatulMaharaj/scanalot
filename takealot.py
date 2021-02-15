@@ -7,7 +7,6 @@ notify = False
 inStock = ""
 
 link = "https://www.takealot.com/ps5-1tb-glacier-white-digital-edition/PLID70627463"
-link = "https://m.takealot.com/playstation-5-dualsense-controller-glacier-white-ps5/PLID70627465"
 
 resp = session.get(link)  # Use the object above to connect to needed webpage
 resp.html.render(timeout=5, sleep=5)  # Run JavaScript code on webpage
