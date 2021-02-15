@@ -51,6 +51,10 @@ jobs:
     - name: Run the incredible connection script
       run: |
         python incredible.py
+        
+    - name: Run the Game4U script
+      run: |
+        python game4u.py
 
     - name: Run the koodoo script
       run: |
@@ -59,3 +63,7 @@ jobs:
     - name: Run the takealot script
       run: |
         python takealot.py
+    
+    - name: Run the Game script
+      run: |
+        python game.py
