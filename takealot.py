@@ -10,9 +10,27 @@ link = (
     "https://api.takealot.com/rest/v-1-10-0/product-details/PLID70627463?platform=mobi"
 )
 
-r = requests.get(link)
-print(r.text)
-print(r.content)
+payload = {
+    "headers": {
+        "accept": "*/*",
+        "accept-language": "en-US,en;q=0.9",
+        "cache-control": "max-age=0",
+        "if-none-match": 'W/"2622219575084645824"',
+        "sec-ch-ua": '"Chromium";v="88", "Google Chrome";v="88", ";Not\\\\A\\"Brand";v="99"',
+        "sec-ch-ua-mobile": "?1",
+        "sec-fetch-dest": "empty",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-site": "same-site",
+    },
+    "referrer": "https://m.takealot.com/",
+    "referrerPolicy": "strict-origin-when-cross-origin",
+    "method": "GET",
+    "mode": "cors",
+    "credentials": "omit",
+}
+
+
+r = requests.get(link, data=payload)
 data = json.loads(r.text)
 inStock = data["stock_availability"]["status"]
 
