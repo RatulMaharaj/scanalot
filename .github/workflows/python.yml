@@ -36,6 +36,15 @@ jobs:
           ${{ runner.os }}-pip-
           ${{ runner.os }}-
 
+    - name: Cache chrome webdriver
+      uses: actions/cache@v2
+      with:
+        path: /home/runner/.local/share/pyppeteer
+        key: ${{ runner.os }}-chromewebdriver-${{ hashFiles('requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-chromewebdriver-
+          ${{ runner.os }}-
+
     - name: Install dependencies
       run: pip install -r requirements.txt
         
