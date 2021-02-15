@@ -6,11 +6,15 @@ import json
 
 notify = False
 
-link = "https://api.takealot.com/rest/v-1-10-0/product-details/PLID70627463?platform=mobi"
+link = (
+    "https://api.takealot.com/rest/v-1-10-0/product-details/PLID70627463?platform=mobi"
+)
 
 r = requests.get(link)
+print(r.text)
+print(r.content)
 data = json.loads(r.text)
-inStock = data["stock_availability"]['status']
+inStock = data["stock_availability"]["status"]
 
 if inStock.lower() == "in stock":
     notify = True
