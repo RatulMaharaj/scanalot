@@ -35,6 +35,8 @@ jobs:
         key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
         restore-keys: |
           ${{runner.os}}-pip-
+
+    - name: pip list
       run: pip list
 
     - name: Install Dependencies
