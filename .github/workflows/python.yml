@@ -1,0 +1,40 @@
+name: Run python application
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    env:
+      SENDGRID_EMAIL_API: ${{ secrets.SENGRID_EMAIL_API }}
+      TO_EMAIL: ${{ secrets.TO_EMAIL }}
+      FROM_EMAIL: ${{ secrets.FROM_EMAIL }}
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Set up Python 3.8.5
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8.5
+    
+    - name: Cache libraries
+      uses: actions/cache@v2
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          #{{runner.os}}-pip-
+        
+    - name: Run the takealot script
+      run: |
+        python takealot.py    
+        
+    - name: Run the incredible connection script
+      run: |
+        python incredible.py
