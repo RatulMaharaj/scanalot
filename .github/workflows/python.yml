@@ -1,6 +1,12 @@
 name: Run python application
 
 on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
   schedule:
     - cron: "*/10 * * * *"
 
@@ -36,3 +42,11 @@ jobs:
     - name: Run the incredible connection script
       run: |
         python incredible.py
+
+    - name: Run the koodoo script
+      run: |
+        python koodoo.py
+    
+    - name: Run the takealot script
+      run: |
+        python takealot.py

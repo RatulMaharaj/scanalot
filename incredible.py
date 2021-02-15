@@ -1,8 +1,6 @@
-import os
-from sendgrid import SendGridAPIClient
-from sendgrid.helpers.mail import Mail
-import requests
+from utils.email import send_email
 from bs4 import BeautifulSoup
+import requests
 
 notify = False
 inStock = ""
@@ -24,16 +22,4 @@ if inStock.lower() != "currently out of stock":
 print("Incredible Connection has stock: ", notify)
 
 if notify:  # Send a notification
-    message = Mail(
-        from_email=os.environ.get("FROM_EMAIL"),
-        to_emails=os.environ.get("TO_EMAIL"),
-        subject="The PS5 is in stock!!!",
-        html_content=f"Click on this <a href='{link}'>link</a> to buy!",
-    )
-    try:
-        sg = SendGridAPIClient(os.environ.get("SENDGRID_API_KEY"))
-        response = sg.send(message)
-        print("Response ", response.status_code)
-        print("Message Sent!")
-    except Exception as e:
-        print(e.message)
+    send_email("Incredible Connection", link)
