@@ -1,4 +1,4 @@
-name: Run python scripts
+name: Run python application
 
 on:
   push:
