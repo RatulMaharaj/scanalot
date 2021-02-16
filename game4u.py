@@ -1,24 +1,27 @@
-from utils.email import send_email
+from utils.email import send_email, checkIfSent
 from bs4 import BeautifulSoup
 import requests
 
-notify = False
-inStock = ""
+store_name = "Game4u"
 
-link = "https://game4u.co.za/product/playstation-5-digital-edition-ps5/"
+if checkIfSent(store_name) is False:
+    notify = False
+    inStock = ""
 
-r = requests.get(link)
-soup = BeautifulSoup(r.text, "html.parser")
+    link = "https://game4u.co.za/product/playstation-5-digital-edition-ps5/"
 
-try:
-    inStock = soup.find("p", class_="stock out-of-stock").get_text()
-except:
-    pass  # do nothing if the item doesn't exist
+    r = requests.get(link)
+    soup = BeautifulSoup(r.text, "html.parser")
 
-if inStock.lower() != "out of stock":
-    notify = True
+    try:
+        inStock = soup.find("p", class_="stock out-of-stock").get_text()
+    except:
+        pass  # do nothing if the item doesn't exist
 
-print("Game4U has stock: ", notify)
+    if inStock.lower() != "out of stock":
+        notify = True
 
-if notify:  # Send a notification
-    send_email("Game4U", link)
+    print(f"{store_name} has stock: ", notify)
+
+    if notify:  # Send a notification
+        send_email(store_name, link)

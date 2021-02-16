@@ -1,29 +1,32 @@
-from utils.email import send_email
+from utils.email import send_email, checkIfSent
 from bs4 import BeautifulSoup
 from requests_html import HTMLSession
 
-session = HTMLSession()  # create an HTML Session object
-notify = False
-inStock = ""
+store_name = "Takealot"
 
-link = "https://www.takealot.com/ps5-1tb-glacier-white-digital-edition/PLID70627463"
-# link = "https://m.takealot.com/playstation-5-dualsense-controller-glacier-white-ps5/PLID70627465"
+if checkIfSent(store_name) is False:
+    session = HTMLSession()  # create an HTML Session object
+    notify = False
+    inStock = ""
 
-resp = session.get(link)  # Use the object above to connect to needed webpage
-resp.html.render(timeout=5, sleep=5)  # Run JavaScript code on webpage
+    link = "https://www.takealot.com/ps5-1tb-glacier-white-digital-edition/PLID70627463"
+    # link = "https://m.takealot.com/playstation-5-dualsense-controller-glacier-white-ps5/PLID70627465"
 
-soup = BeautifulSoup(resp.html.html, "html.parser")
+    resp = session.get(link)  # Use the object above to connect to needed webpage
+    resp.html.render(timeout=5, sleep=5)  # Run JavaScript code on webpage
 
-try:
-    inStock = soup.find("div", class_="stock-availability-status").span.getText()
+    soup = BeautifulSoup(resp.html.html, "html.parser")
 
-except:
-    pass  # do nothing if the item doesn't exist
+    try:
+        inStock = soup.find("div", class_="stock-availability-status").span.getText()
 
-if inStock.lower() != "supplier out of stock":
-    notify = True
+    except:
+        pass  # do nothing if the item doesn't exist
 
-print("Takealot has stock: ", notify)
+    if inStock.lower() != "supplier out of stock":
+        notify = True
 
-if notify:  # Send a notification
-    send_email("Takealot", link)
+    print(f"{store_name} has stock: ", notify)
+
+    if notify:  # Send a notification
+        send_email(store_name, link)

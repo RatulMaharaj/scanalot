@@ -1,29 +1,30 @@
-from utils.email import send_email
+from utils.email import send_email, checkIfSent
 from bs4 import BeautifulSoup
 from requests_html import HTMLSession
 
-session = HTMLSession()  # create an HTML Session object
-notify = False
-inStock = ""
+store_name = "Koodoo"
 
-link = (
-    "https://koodoo.co.za/collections/all-consoles/products/playstation-5-ps5-digital"
-)
+if checkIfSent(store_name) is False:
+    session = HTMLSession()  # create an HTML Session object
+    notify = False
+    inStock = ""
 
-resp = session.get(link)  # Use the object above to connect to needed webpage
-resp.html.render()  # Run JavaScript code on webpage
+    link = "https://koodoo.co.za/collections/all-consoles/products/playstation-5-ps5-digital"
 
-soup = BeautifulSoup(resp.html.html, "html.parser")
+    resp = session.get(link)  # Use the object above to connect to needed webpage
+    resp.html.render()  # Run JavaScript code on webpage
 
-try:
-    inStock = soup.find(id="addToCartText-product-template").getText()
-except:
-    pass  # do nothing if the item doesn't exist
+    soup = BeautifulSoup(resp.html.html, "html.parser")
 
-if inStock.lower() != "sold out":
-    notify = True
+    try:
+        inStock = soup.find(id="addToCartText-product-template").getText()
+    except:
+        pass  # do nothing if the item doesn't exist
 
-print("Koodoo has stock: ", notify)
+    if inStock.lower() != "sold out":
+        notify = True
 
-if notify:  # Send a notification
-    send_email("Koodoo", link)
+    print(f"{store_name} has stock: ", notify)
+
+    if notify:  # Send a notification
+        send_email(store_name, link)

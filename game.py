@@ -1,28 +1,31 @@
-from utils.email import send_email
+from utils.email import send_email, checkIfSent
 from bs4 import BeautifulSoup
 from requests_html import HTMLSession
 
-session = HTMLSession()  # create an HTML Session object
-notify = False
-inStock = ""
+store_name = "Game"
 
-link = "https://www.game.co.za/game-za/en/All-Game-Categories/Electronics-%26-Entertainment/Gaming/Consoles/PlayStation-Consoles/Playstation-PS5-1TB-Glacier-White-PS5-1TB---GLACIER-WH/p/818469-EA"
+if checkIfSent(store_name) is False:
+    session = HTMLSession()  # create an HTML Session object
+    notify = False
+    inStock = ""
 
-resp = session.get(link)  # Use the object above to connect to needed webpage
-resp.html.render()  # Run JavaScript code on webpage
+    link = "https://www.game.co.za/game-za/en/All-Game-Categories/Electronics-%26-Entertainment/Gaming/Consoles/PlayStation-Consoles/Playstation-PS5-1TB-Glacier-White-PS5-1TB---GLACIER-WH/p/818469-EA"
 
-soup = BeautifulSoup(resp.html.html, "html.parser")
+    resp = session.get(link)  # Use the object above to connect to needed webpage
+    resp.html.render()  # Run JavaScript code on webpage
 
-try:
-    inStock = soup.find("form", id="addToCartForm").button.getText().strip()
-    print(inStock)
-except:
-    pass  # do nothing if the item doesn't exist
+    soup = BeautifulSoup(resp.html.html, "html.parser")
 
-if inStock.lower() != "out of stock":
-    notify = True
+    try:
+        inStock = soup.find("form", id="addToCartForm").button.getText().strip()
+        print(inStock)
+    except:
+        pass  # do nothing if the item doesn't exist
 
-print("Game has stock: ", notify)
+    if inStock.lower() != "out of stock":
+        notify = True
 
-if notify:  # Send a notification
-    send_email("Game", link)
+    print(f"{store_name} has stock: ", notify)
+
+    if notify:  # Send a notification
+        send_email(store_name, link)
