@@ -18,7 +18,6 @@ if checkIfSent(store_name) is False:
 
     try:
         inStock = soup.find("form", id="addToCartForm").button.getText().strip()
-        print(inStock)
     except:
         pass  # do nothing if the item doesn't exist
 
