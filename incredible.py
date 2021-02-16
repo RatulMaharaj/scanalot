@@ -5,7 +5,6 @@ import requests
 store_name = "Incredible"
 
 if checkIfSent(store_name) is False:
-    print("Scraping the site...")
     notify = False
     inStock = ""
 
