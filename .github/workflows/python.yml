@@ -49,6 +49,10 @@ jobs:
       run: |
         python incredible.py
         
+    - name: Run the btgames script
+      run: |
+        python btgames.py
+        
     - name: Run the Game4U script
       run: |
         python game4u.py
