@@ -44,30 +44,34 @@ jobs:
 
     - name: Install dependencies
       run: pip install -r requirements.txt
-        
-    - name: Run the incredible connection script
-      run: |
-        python incredible.py
-        
-    - name: Run the btgames script
-      run: |
-        python btgames.py
-        
-    - name: Run the Game4U script
-      run: |
-        python game4u.py
 
-    - name: Run the koodoo script
+     - name: Run the iStore script
       run: |
-        python koodoo.py
+        python iStore.py
+
+    # - name: Run the incredible connection script
+    #   run: |
+    #     python incredible.py
+        
+    # - name: Run the btgames script
+    #   run: |
+    #     python btgames.py
+        
+    # - name: Run the Game4U script
+    #   run: |
+    #     python game4u.py
+
+    # - name: Run the koodoo script
+    #   run: |
+    #     python koodoo.py
     
-    - name: Run the takealot script
-      run: |
-        python takealot.py
+    # - name: Run the takealot script
+    #   run: |
+    #     python takealot.py
     
-    - name: Run the Game script
-      run: |
-        python game.py
+    # - name: Run the Game script
+    #   run: |
+    #     python game.py
 
     - name: Commit and push if sent.json changed
       run: |-
