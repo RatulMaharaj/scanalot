@@ -1,1 +1,11 @@
-{"sent": {"Btgames": true, "Game": true, "Game4u": true, "Koodoo": true, "Incredible": true, "Takealot": true, "iStore": true}}
+{
+  "sent": {
+    "Btgames": true,
+    "Game": true,
+    "Game4u": true,
+    "Koodoo": true,
+    "Incredible": true,
+    "Takealot": true,
+    "iStore": false
+  }
+}
