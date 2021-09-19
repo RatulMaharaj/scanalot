@@ -2,3 +2,4 @@ sendgrid.env
 .vscode/
 venv
 __pycache__
+ignore.*
