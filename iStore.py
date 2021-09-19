@@ -8,7 +8,7 @@ if checkIfSent(store_name) is False:
     notify = False
     inStock = ""
 
-    link = "https://www.istore.co.za/iphone-12-pro"
+    link = "https://www.istore.co.za/iphone-13-pro"
 
     r = requests.get(link)
     soup = BeautifulSoup(r.text, "html.parser")
@@ -24,4 +24,4 @@ if checkIfSent(store_name) is False:
     print(f"{store_name} has stock: ", notify)
 
     if notify:  # Send a notification
-        send_email(store_name, link)
+        send_email(store_name, link, product="iPhone 13 Pro")
