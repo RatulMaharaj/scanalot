@@ -1,4 +1,4 @@
-import { test } from "@playwright/test";
+import { expect, test } from "@playwright/test";
 import { sendPushNotification } from "./notify";
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
@@ -89,6 +89,30 @@ test("Check digicape.co.za", async ({ page }) => {
     // send pushover notification
     await sendPushNotification(
       `iPhone 16 Pro available at Digicape`,
+      url
+    ).catch(console.error);
+  }
+});
+
+test("Check Takealot", async ({ page }) => {
+  const url =
+    "https://www.takealot.com/apple-iphone-16-pro-128gb/PLID95955146?colour_variant=White+Titanium";
+  await page.goto(url);
+
+  await page.waitForSelector('[data-ref="wishlist-add-button"]');
+
+  // get the element with id btn
+  const addToCartBtn = await page
+    .locator('[data-ref="add-to-cart-button"]')
+    .count();
+
+  console.log({ addToCartBtn });
+
+  if (addToCartBtn > 0) {
+    // if it is available, click it
+    // send pushover notification
+    await sendPushNotification(
+      `iPhone 16 Pro available at Takealot`,
       url
     ).catch(console.error);
   }
