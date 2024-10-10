@@ -3,3 +3,8 @@ sendgrid.env
 venv
 __pycache__
 ignore.*
+node_modules/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
