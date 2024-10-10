@@ -74,12 +74,15 @@ test("Check digicape.co.za", async ({ page }) => {
   await page.goto(url);
 
   // get the element with id btn
-  const addToCartButton = page.locator("#btn");
+  const addToCartBtn = await page
+    .locator(
+      '[data-product-action="https://www.digicape.co.za/index.php?route=checkout/cart/add"]'
+    )
+    .innerText();
 
-  // check if contains the text "BACKORDER"
-  const isBackOrdered = (await addToCartButton.innerText())
-    .toLowerCase()
-    .includes("backorder");
+  console.log({ addToCartBtn });
+
+  const isBackOrdered = addToCartBtn.toLowerCase().includes("backorder");
 
   // if it is available, click it
   if (!isBackOrdered) {
