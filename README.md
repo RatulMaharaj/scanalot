@@ -1,17 +1,41 @@
 # Scanalot
-## Scan online stores in South Africa for PS5 availability
 
-The code in this repo is used to scrape online retailers sites to check for availability of PS5 Digital Edition stock. One or more users can be notified via email when one of five stores marks the item as not out of stock on their site. Only one email is sent per store. The scripts are meant to be run on a schedule.
+Scan online stores in South Africa for stock changes or availability using playwright.
 
-#### Environment Variables
+## About the Project
+Scanalot is designed to scrape online retailers' websites in South Africa to check for stock changes or availability. Users are notified via Pushover when one of the monitored stores has the item in stock. The scripts are intended to be run on a schedule using a github action.
 
-There are three required environment variables:
+## Getting Started
 
-`SENDGRID_API_KEY` A valid SendGrid API key
+### Prerequisites
+- Node.js and npm installed
+- Valid Pushover API tokens
 
-`FROM_EMAIL` A valid SendGrid email address
+### Installation
+1. Clone the repository:
+```sh
+git clone https://github.com/RatulMaharaj/scanalot.git
+```
 
-`TO_EMAIL` A string containing the recipients email addresses. Multiple email addresses can be seperated by spaces.
+2. Install NPM packages:
+```sh
+cd scanalot
+pnpm install
+```
 
-## The code in this repository does **NOT** automatically purchase a PS5.
-The purpose of this code is for me to practice webscraping.
+### Environment Variables
+
+Create a `.env` file in the root of the project with the following variables:
+```sh
+PUSHOVER_USER_KEY=your_user_key
+PUSHOVER_API_TOKEN=your_api_token
+```
+
+
+### Disclaimer
+
+The code in this repository does NOT automatically purchase any items. The purpose of this code is for practicing web scraping. Please respect the terms of service of the websites you are scraping.
+
+### License
+
+Distributed under the MIT License. See `LICENSE` for more information.
