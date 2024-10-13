@@ -101,14 +101,22 @@ test("Check Takealot", async ({ page }) => {
 
   await page.waitForSelector('[data-ref="wishlist-add-button"]');
 
-  // get the element with id btn
-  const addToCartBtn = await page
-    .locator('[data-ref="add-to-cart-button"]')
-    .count();
+  const sidebarContent = await page
+    .locator(".pdp-module_sidebar-buybox_1m6Sm")
+    .allInnerTexts();
 
-  console.log({ addToCartBtn });
+  let isInStock = false;
+  sidebarContent.map((content) => {
+    if (content.toLowerCase().includes("add to cart")) {
+      isInStock = true;
+    }
 
-  if (addToCartBtn > 0) {
+    if (content.toLowerCase().includes("supplier out of stock")) {
+      isInStock = false;
+    }
+  });
+
+  if (isInStock) {
     // if it is available, click it
     // send pushover notification
     await sendPushNotification(
