@@ -5,8 +5,8 @@ on:
       - main
   workflow_dispatch:
   schedule:
-    # every 3 hours
-    - cron: "0 */3 * * *"
+    # Run every hour
+    - cron: "0 * * * *"
 jobs:
   test:
     timeout-minutes: 60
