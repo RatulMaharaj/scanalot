@@ -13,7 +13,7 @@ test("Check incredible.co.za", async ({ page }) => {
   // check if the 128GB option div is disabled
   // 256: option-label-storage_capacity-955-item-11384
   const storageBtn = page.locator(
-    "#option-label-storage_capacity-955-item-11384"
+    "#option-label-storage_capacity-955-item-11382"
   );
 
   // check if storage button is disabled
