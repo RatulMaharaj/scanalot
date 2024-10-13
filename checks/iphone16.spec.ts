@@ -99,11 +99,10 @@ test("Check Takealot", async ({ page }) => {
     "https://www.takealot.com/apple-iphone-16-pro-128gb/PLID95955146?colour_variant=White+Titanium";
   await page.goto(url);
 
-  await page.waitForSelector(".pdp-module_sidebar-buybox_1m6Sm");
+  const sidebar = page.locator(".pdp-module_sidebar-buybox_1m6Sm");
+  await sidebar.waitFor();
 
-  const sidebarContent = await page
-    .locator(".pdp-module_sidebar-buybox_1m6Sm")
-    .allInnerTexts();
+  const sidebarContent = await sidebar.allInnerTexts();
 
   let isInStock = false;
   sidebarContent.map((content) => {
